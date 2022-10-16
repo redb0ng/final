@@ -4,28 +4,34 @@ const indy = require("../../indy/index");
 
 module.exports = {
   //postman test용, 원래는 get요청
+  //VC--> VP 로 저장
   post: async (req, res) => {
     try {
       let token = req.cookies.x_auth;
-      let user = await User.findOne({ token: token })
-    
+      let user = await User.findOne({ token: token });
+
       let proverWallet = await indy.wallet.get(user.email, user.password);
-      let encryptedMessage = await indy.proofs.ProverSubmitPresentation(proverWallet);
-      
-      await User3.updateOne({ email: user.email }, { encryptedMessage: encryptedMessage })
-      
+      let encryptedMessage = await indy.proofs.ProverSubmitPresentation(
+        proverWallet
+      );
+
+      await User3.updateOne(
+        { email: user.email },
+        { encryptedMessage: encryptedMessage }
+      );
+
       if (encryptedMessage) {
         return res.status(200).json({
           success: true,
-          email: user.email
-        })
+          email: user.email,
+        });
       } else {
-       return res.status(400).json({
-         result: "InvalidProcess"
-        })
-     }
+        return res.status(400).json({
+          result: "InvalidProcess",
+        });
+      }
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
   },
   get: async (req, res) => {
@@ -38,12 +44,15 @@ module.exports = {
         if (user) {
           currentUser = user;
         }
-      })
-      let proverWallet = await indy.wallet.get(currentUser.email, currentUser.password)
-      let proofMessage = await indy.proofs.acceptProofReq(proverWallet)
-      console.log("qr에 들어갈 증명내용 :", proofMessage)
+      });
+      let proverWallet = await indy.wallet.get(
+        currentUser.email,
+        currentUser.password
+      );
+      let proofMessage = await indy.proofs.acceptProofReq(proverWallet);
+      console.log("qr에 들어갈 증명내용 :", proofMessage);
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
-}
+  },
+};

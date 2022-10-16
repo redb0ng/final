@@ -3,6 +3,7 @@ const { User3 } = require("../../models/User2");
 const { User } = require("../../models/User");
 const indy = require("../../indy/index");
 const sdk = require("indy-sdk");
+const e = require("express");
 
 module.exports = {
   post: async (req, res) => {
@@ -23,12 +24,39 @@ module.exports = {
         if (err) throw err;
         if (!user) return res.json({ message: "토큰이 만료되었습니다." });
         if (user) {
-          const user3 = new User3({...req.body, email: user.email,
-          });
+          const user3 = new User3({ ...req.body, email: user.email });
           await user3.save();
-          let [proverWallet, userDid, userVerkey, credential, revId, revRegDelta, credId] = await indy.credentials.CreateCredentialProcess(user.email, user.password, vcObj);
-          console.log("Create new user account",await sdk.listMyDidsWithMeta(proverWallet));
-          console.log("userDid: ",userDid, "userVerkey: ",userVerkey,"credential :",credential,"revId: ",revId,"revRegDelta: ", revRegDelta,"credId: ", credId);
+          let [
+            proverWallet,
+            userDid,
+            userVerkey,
+            credential,
+            revId,
+            revRegDelta,
+            credId,
+          ] = await indy.credentials.CreateCredentialProcess(
+            user.email,
+            user.password,
+            vcObj
+          );
+          console.log(
+            "Create new user account",
+            await sdk.listMyDidsWithMeta(proverWallet)
+          );
+          console.log(
+            "userDid: ",
+            userDid,
+            "userVerkey: ",
+            userVerkey,
+            "credential :",
+            credential,
+            "revId: ",
+            revId,
+            "revRegDelta: ",
+            revRegDelta,
+            "credId: ",
+            credId
+          );
 
           await sdk.closeWallet(proverWallet);
         }
@@ -42,15 +70,24 @@ module.exports = {
 
   get: async (req, res) => {
     try {
-      console.log();
-      User3.findOne({ email: req.user.email }, (err, images) => {
-        if (err) throw err;
-        if (!images) return res.json({ message: "등록한 이미지가 없습니다!" });
-
-        res.status(200).json({ message: "get photos", imageUrl: images.image });
+      let token = req.cookies.x_auth;
+      await User.findByToken(token, async (err, user) => {
+        if (user) {
+          let userInfo = await User3.findOne({ email: user.email });
+          if (!userInfo) {
+            return res.status(400).json({ success: false });
+          } else {
+            console.log(JSON.stringify(userInfo));
+            return res.status(200).json({
+              success: true,
+              userInfo: userInfo,
+            });
+          }
+        }
       });
     } catch (err) {
       console.log(err);
+      return res.status(400).json({ success: false });
     }
   },
 };
