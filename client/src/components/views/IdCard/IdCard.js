@@ -121,7 +121,7 @@ const IdCard = (props) => {
             />
           </React.Fragment> */}
           <Test fileToParents={updateImages}></Test>
-          <label className="label1"> 이름</label>
+          <label className="label1"> Name</label>
           <input
             className="input_box"
             //placeholder="user@naver.com"
@@ -130,21 +130,21 @@ const IdCard = (props) => {
             onChange={onNameHandler}
           ></input>
           {/* <input className='input_box' type="email" value={Email} onChange={onEmailHandler}   /> */}
-          <label className="label">주민번호</label>
+          <label className="label">Resident Registration Number</label>
           <input
             className="input_box"
             type="text"
             value={Id}
             onChange={onIdHandler}
           />
-          <label className="label">나이</label>
+          <label className="label">Age</label>
           <input
             className="input_box"
             type="number"
             value={Age}
             onChange={onAgeHandler}
           />
-          <label className="label">주소</label>
+          <label className="label">Address</label>
           <input
             className="input_box"
             type="text"

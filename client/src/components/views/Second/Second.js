@@ -48,7 +48,7 @@ function Second() {
         onSubmit={onSubmitHandler}
       >
         <div className="Logo">
-          2차 비밀번호
+          2-Step Verification
           <hr className="hr" />
         </div>
 

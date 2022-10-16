@@ -1,8 +1,6 @@
 const { upload } = require("../../middleware/uploads");
 const { User3 } = require("../../models/User2");
 const { User } = require("../../models/User");
-const indy = require("../../indy/index");
-const sdk = require("indy-sdk");
 const e = require("express");
 
 module.exports = {

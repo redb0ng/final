@@ -1,6 +1,5 @@
 const { User3 } = require("../../models/User2");
 const { User } = require("../../models/User");
-const indy = require("../../indy/index");
 
 module.exports = {
   //postman test용, 원래는 get요청
