@@ -108,20 +108,10 @@ const IdCard = (props) => {
           style={{ display: "flex", flexDirection: "column" }}
           onSubmit={onSubmitHandler}
         >
-          {/* <React.Fragment>
-            <img
-              src={imageUrl ? imageUrl : people}
-              style={{ width: "200px", height: "200px" }}
-            ></img>
-            <input
-              className="inputImg"
-              type="file"
-              ref={imgRef}
-              onChange={onChangeImage}
-            />
-          </React.Fragment> */}
-          <Test fileToParents={updateImages}></Test>
-          <label className="label1"> Name</label>
+          <div className="imgupload">
+            <Test fileToParents={updateImages}></Test>
+          </div>
+          <label className="label"> Name</label>
           <input
             className="input_box"
             //placeholder="user@naver.com"
@@ -153,7 +143,7 @@ const IdCard = (props) => {
           />
 
           <button id="button" type="submit">
-            등록
+            Submit
           </button>
           {/* <Button id="button" htmlType="submit">
           Login

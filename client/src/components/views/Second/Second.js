@@ -67,7 +67,7 @@ function Second() {
           />
           <br />
           <button id="button" className="input_box" htmlType="submit">
-            인증
+            Submit
           </button>
           <br />
           <br />
