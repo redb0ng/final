@@ -1,7 +1,8 @@
 import QRCode from "qrcode";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import Loading from "../Loading/Loading";
 import "../QR/qrGen.css";
+import axios from "axios";
 
 function QRgenerator() {
   const [url, setUrl] = useState("");
@@ -9,18 +10,13 @@ function QRgenerator() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(true);
-    api();
-  }, []);
+    axios.post("/api/users/qrgen").then((response) => {
+      setUrl(response.data.email);
+      console.log(response.data);
 
-  const api = async () => {
-    try {
-      console.log("로딩");
       setLoading(false);
-    } catch (e) {
-      alert("Error request" + e);
-    }
-  };
+    });
+  }, "");
 
   const GenerateQRCode = () => {
     QRCode.toDataURL(
@@ -45,15 +41,17 @@ function QRgenerator() {
   return (
     <div className="app">
       {loading && <Loading />}
-      <div className="headerQr">QR Generator</div>
+      <div className="headerQr">
+        <h1>QR Generator</h1>
+      </div>
       <hr className="hr" />
       <div className="main1">
         <input
           className="qrInput"
           type="text"
-          placeholder="vc value"
+          placeholder="아이디 입력(email)"
           value={url}
-          onChange={(e) => setUrl(e.target.value)}
+          disabled
         />
         <button className="btnGen" onClick={GenerateQRCode}>
           Generate

@@ -5,6 +5,7 @@ import { idUser } from "../../../_actions/user_action";
 import { Link, useNavigate } from "react-router-dom";
 import "../IdCard/IdCard.css";
 import Test from "../Test/Test";
+import Loading from "../Loading/Loading";
 const people = require("../../../images/profile.jpg");
 
 const IdCard = () => {
@@ -16,6 +17,7 @@ const IdCard = () => {
   const [Age, setAge] = useState("");
   const [Address, setAddress] = useState("");
   const [Images, setImages] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const onNameHandler = (event) => {
     setName(event.currentTarget.value);
@@ -50,6 +52,7 @@ const IdCard = () => {
 
     dispatch(idUser(body)).then((response) => {
       if (response.payload.success) {
+        setLoading(false);
         alert("민증 등록");
         navigate("/second");
       } else {
@@ -68,6 +71,7 @@ const IdCard = () => {
         height: "100vh",
       }}
     >
+      {loading && <Loading />}
       <form
         className="Img"
         style={{
@@ -78,7 +82,7 @@ const IdCard = () => {
         onSubmit={onSubmitHandler}
       >
         <div className="Logo">
-          Idcard
+          <h1>Idcard</h1>
           <hr className="hr" />
         </div>
         <br />
@@ -93,6 +97,7 @@ const IdCard = () => {
           </div>
           <label className="label"> Name</label>
           <input
+            id="in"
             className="input_box"
             //placeholder="user@naver.com"
             type="text"
@@ -102,6 +107,7 @@ const IdCard = () => {
           {/* <input className='input_box' type="email" value={Email} onChange={onEmailHandler}   /> */}
           <label className="label">Resident Registration Number</label>
           <input
+            id="in"
             className="input_box"
             type="text"
             value={Id}
@@ -109,6 +115,7 @@ const IdCard = () => {
           />
           <label className="label">Age</label>
           <input
+            id="in"
             className="input_box"
             type="number"
             value={Age}
@@ -116,6 +123,7 @@ const IdCard = () => {
           />
           <label className="label">Address</label>
           <input
+            id="in"
             className="input_box"
             type="text"
             value={Address}

@@ -157,3 +157,22 @@ body {
   margin-bottom: 1em;
   padding: 0 16px;
 }
+
+@media screen and (max-width: 768px) {
+  .main1,
+  .main2 {
+    width: 360px;
+  }
+  .textAreaIn {
+    width: 300px;
+  }
+  #input_button {
+    width: 300px;
+  }
+  #input_button:hover {
+    width: 300px;
+  }
+  .formContainer {
+    width: 330px;
+  }
+}

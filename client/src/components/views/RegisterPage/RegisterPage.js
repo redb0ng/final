@@ -74,7 +74,7 @@ function RegisterPage() {
         onSubmit={onSubmitHandler}
       >
         <div className="Logo">
-          Register
+          <h1>Register</h1>
           <hr className="hr" />
         </div>
         <div
@@ -84,6 +84,7 @@ function RegisterPage() {
         >
           <label className="label">Email</label>
           <input
+            id="in"
             className="input_box"
             type="email"
             value={Email}
@@ -92,6 +93,7 @@ function RegisterPage() {
 
           <label className="label">Name</label>
           <input
+            id="in"
             className="input_box"
             type="text"
             value={Name}
@@ -100,6 +102,7 @@ function RegisterPage() {
 
           <label className="label">Password</label>
           <input
+            id="in"
             className="input_box"
             type="password"
             value={Password}
@@ -108,6 +111,7 @@ function RegisterPage() {
 
           <label className="label">Confirm Password</label>
           <input
+            id="in"
             className="input_box"
             type="password"
             value={ConfirmPassword}
@@ -116,13 +120,14 @@ function RegisterPage() {
 
           <label className="label">Second Password</label>
           <input
+            id="in"
             className="input_box"
             type="password"
             value={SecondPassword}
             onChange={onSecondPasswordHandler}
           />
           <br />
-          <button id="button" className="input_box" htmlType="submit">
+          <button id="button1" className="input_box" htmlType="submit">
             Register
           </button>
           <Link className="link" to="/">

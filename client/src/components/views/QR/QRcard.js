@@ -12,12 +12,13 @@ function QRcard() {
   };
   return (
     <div className="app">
-      <div className="headerQr">ID card</div>
+      <div className="headerQr">
+        <h1>ID card</h1>
+      </div>
       <hr className="hr" />
       <div className="main1">
         <div className="formContainer">
           <div className="cardImg">
-            /
             <img className="img" src="dsfdsf" />
           </div>
           <div className="idcardContent">
