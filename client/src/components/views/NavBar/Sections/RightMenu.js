@@ -41,6 +41,9 @@ function RightMenu() {
   const clickSecond = () => {
     navigate("/second");
   };
+  const clickScanner = () => {
+    navigate("/qr_scanner");
+  };
 
   const onClickDrop = () => {
     function scrollIntoView(selector) {
@@ -85,7 +88,18 @@ function RightMenu() {
         </li>
       </ul>
     );
-  } else {
+  } else if (user.userData && user.userData.isAdmin) {
+    return (
+      <ul className="navbar__menu">
+        <li className="navbar__menu__item" onClick={clickScanner}>
+          Scanner
+        </li>
+        <li button className="navbar__menu__item" onClick={onClickHandler}>
+          Logout
+        </li>
+      </ul>
+    );
+  } else if (user.userData && user.userData.isAuth) {
     return (
       <ul className="navbar__menu">
         <li className="navbar__menu__item" onClick={clickSecond}>
