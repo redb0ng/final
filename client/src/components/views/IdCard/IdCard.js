@@ -7,29 +7,9 @@ import "../IdCard/IdCard.css";
 import Test from "../Test/Test";
 const people = require("../../../images/profile.jpg");
 
-const IdCard = (props) => {
+const IdCard = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const [imageUrl, setImageUrl] = useState(null);
-
-  const imgRef = useRef();
-
-  const onChangeImage = () => {
-    const reader = new FileReader();
-    const file = imgRef.current.files[0];
-    console.log(file);
-
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      setImageUrl(reader.result);
-      console.log("이미지주소", reader.result);
-    };
-  };
-
-  // const onClickFileBtn = (e) => {
-  //   imgRef.current.click();
-  // };
 
   const [Name, setName] = useState("");
   const [Id, setId] = useState("");

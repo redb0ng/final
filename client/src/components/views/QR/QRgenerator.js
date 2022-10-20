@@ -1,10 +1,26 @@
 import QRCode from "qrcode";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Loading from "../Loading/Loading";
 import "../QR/qrGen.css";
 
 function QRgenerator() {
   const [url, setUrl] = useState("");
   const [qr, setQr] = useState("");
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(true);
+    api();
+  }, []);
+
+  const api = async () => {
+    try {
+      console.log("로딩");
+      setLoading(false);
+    } catch (e) {
+      alert("Error request" + e);
+    }
+  };
 
   const GenerateQRCode = () => {
     QRCode.toDataURL(
@@ -28,6 +44,7 @@ function QRgenerator() {
 
   return (
     <div className="app">
+      {loading && <Loading />}
       <div className="headerQr">QR Generator</div>
       <hr className="hr" />
       <div className="main1">

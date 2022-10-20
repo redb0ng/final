@@ -24,7 +24,7 @@ function Second() {
 
     dispatch(password2User(body)).then((response) => {
       if (response.payload.secPasswordsuccess) {
-        navigate("/qr_generator");
+        navigate("/qr_card");
       } else {
         alert("Error");
       }

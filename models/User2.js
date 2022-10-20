@@ -4,6 +4,10 @@ const saltRounds = 10;
 const { User } = require("./User");
 
 const user3Schema = mongoose.Schema({
+  wirter: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+  },
   name: {
     type: String,
     maxlength: 10,
@@ -29,7 +33,7 @@ const user3Schema = mongoose.Schema({
   },
   encryptedMessage: {
     type: String,
-  }
+  },
 });
 
 user3Schema.pre("save", function (next) {

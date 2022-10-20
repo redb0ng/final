@@ -59,7 +59,7 @@ function RightMenu() {
           Wallet
         </li>
         <li className="navbar__menu__item" onClick={clickMe}>
-          Register
+          Issue
         </li>
         <li button className="navbar__menu__item" onClick={onClickHandler}>
           Logout
